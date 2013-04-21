@@ -138,7 +138,7 @@ namespace VVVV.Nodes {
 				FTimeStamp[i] = message.TimeStamp.ToString();
 				
 				foreach (string name in Pins.Keys) {
-					VVVV.PluginInterfaces.V2.NonGeneric.ISpread bin = GetISpreadData(Pins[name], i);
+					var bin = GetISpreadData(Pins[name], i);
 					try {
 						//	FLogger.Log(LogType.Debug, message.ToString());
 						

@@ -39,6 +39,10 @@
     <OutputPath>..\plugins\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FeralTic">
+      <HintPath>C:\vvvv\vvvv_45beta29.2_x86_DX11\lib\core\FeralTic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="SlimDX">
       <HintPath>C:\vvvv\vvvv_45beta29.2_x86_DX11\lib\core\SlimDX.dll</HintPath>
@@ -55,6 +59,14 @@
     <Reference Include="System.Xml" />
     <Reference Include="VVVV.Core">
       <HintPath>C:\vvvv\vvvv_45beta29.2_x86_DX11\lib\core\VVVV.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VVVV.DX11.Core">
+      <HintPath>C:\vvvv\vvvv_45beta29.2_x86_DX11\lib\core\VVVV.DX11.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VVVV.DX11.Lib">
+      <HintPath>C:\vvvv\vvvv_45beta29.2_x86_DX11\lib\core\VVVV.DX11.Lib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VVVV.Hosting">

@@ -1,18 +1,11 @@
-#region usings
 using System;
-using System.IO;
-using System.ComponentModel.Composition;
-
 using System.Runtime.Serialization;
-using System.Security.Permissions;
 using System.Collections.Generic;
 using System.Xml;
-
-using VVVV.Nodes;
+using FeralTic.DX11.Resources;
+using VVVV.DX11;
 using VVVV.Utils.VColor;
 using VVVV.Utils.VMath;
-
-#endregion usings
 
 namespace VVVV.Utils.Message {
 	public class MessageResolver : DataContractResolver
@@ -32,6 +25,7 @@ namespace VVVV.Utils.Message {
 			Identity.Add(typeof(Vector2D), "Vector2D".ToLower());
 			Identity.Add(typeof(Vector3D), "Vector3D".ToLower());
 			Identity.Add(typeof(Vector4D), "Vector4D".ToLower());
+			Identity.Add(typeof(DX11Resource<DX11Texture2D>), "Texture2D".ToLower());
 
 			Identity.Add(typeof(Message), "Message".ToLower());
 		}
@@ -40,22 +34,20 @@ namespace VVVV.Utils.Message {
 		{
 			if (Identity.ContainsKey(dataContractType))
 			{
-				XmlDictionary dictionary = new XmlDictionary();
+				var dictionary = new XmlDictionary();
 				typeName = dictionary.Add(Identity[dataContractType]);
 				typeNamespace = dictionary.Add(dataContractType.FullName);
-				return true; // indicating that this resolver knows how to handle
+				return true;
 			}
-			else
-			{
-				// Defer to the known type resolver
-				return knownTypeResolver.TryResolveType(dataContractType, declaredType, null, out typeName, out typeNamespace);
-			}
+			
+			// Defer to the known type resolver
+			return knownTypeResolver.TryResolveType(dataContractType, declaredType, null, out typeName, out typeNamespace);
 		}
 		
 		public override Type ResolveName(string typeName, string typeNamespace, Type type, DataContractResolver knownTypeResolver)
 		{
 			Type foundType = null;
-			foreach (Type t in Identity.Keys) {
+			foreach (var t in Identity.Keys) {
 				if (typeName.ToLower() == Identity[t] && typeNamespace == t.FullName) {
 					foundType = t;
 				}
@@ -64,11 +56,9 @@ namespace VVVV.Utils.Message {
 			if (foundType != null) {
 				return foundType;
 			}
-			else
-			{
-				// Defer to the known type resolver
-				return knownTypeResolver.ResolveName(typeName, typeNamespace, type, null);
-			}
+
+			// Defer to the known type resolver
+			return knownTypeResolver.ResolveName(typeName, typeNamespace, type, null);
 		}
 	}
 	}

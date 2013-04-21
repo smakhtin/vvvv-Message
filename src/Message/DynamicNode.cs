@@ -3,7 +3,8 @@ using System.ComponentModel.Composition;
 using System.Collections.Generic;
 
 using System.Linq;
-
+using FeralTic.DX11.Resources;
+using VVVV.DX11;
 using VVVV.PluginInterfaces.V2;
 
 using VVVV.Utils.VColor;
@@ -88,18 +89,19 @@ namespace VVVV.Utils.Message {
 						
 						switch (type) 
 						{
-							case "double" : Pins[name] = CreatePin<double>(name);break;
-							case "float" : Pins[name] = CreatePin<float>(name);break;
-							case "int" : Pins[name] = CreatePin<int>(name);break;
-							case "bool" : Pins[name] = CreatePin<bool>(name);break;
-							case "vector2d" : Pins[name] = CreatePin<Vector2D>(name);break;
-							case "vector3d" : Pins[name] = CreatePin<Vector3D>(name);break;
-							case "vector4d" : Pins[name] = CreatePin<Vector3D>(name);break;
-							case "string" : Pins[name] = CreatePin<string>(name);break;
-							case "color" : Pins[name] = CreatePin<RGBAColor>(name);break;
-							case "transform" : Pins[name] = CreatePin<Matrix4x4>(name);
-							break;
-							default:  Logger.Log(LogType.Debug, "Type "+type + " not supported!");break;
+							case "double" : Pins[name] = CreatePin<double>(name); break;
+							case "float" : Pins[name] = CreatePin<float>(name); break;
+							case "int" : Pins[name] = CreatePin<int>(name); break;
+							case "bool" : Pins[name] = CreatePin<bool>(name); break;
+							case "vector2d" : Pins[name] = CreatePin<Vector2D>(name); break;
+							case "vector3d" : Pins[name] = CreatePin<Vector3D>(name); break;
+							case "vector4d" : Pins[name] = CreatePin<Vector3D>(name); break;
+							case "string" : Pins[name] = CreatePin<string>(name); break;
+							case "color" : Pins[name] = CreatePin<RGBAColor>(name); break;
+							case "transform" : Pins[name] = CreatePin<Matrix4x4>(name); break;
+							case "texture2d": Pins[name] = CreatePin<DX11Resource<DX11Texture2D>>(name); break;
+							
+							default:  Logger.Log(LogType.Debug, "Type "+type + " not supported!"); break;
 						}
 
 						Types.Add(name, type);
